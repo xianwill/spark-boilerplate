@@ -29,6 +29,14 @@ It includes:
   * A stubbed out project config with baked in path conventions
   * A schema generator
 
+## Packaging
+
+The build is configured with the `assembly` plugin to build an uber jar suitable for deployment. Build it with
+
+```
+sbt assembly
+```
+
 ## Docker
 
 Make your own `.env`
@@ -37,34 +45,41 @@ Make your own `.env`
 cp env.tempate .env
 ```
 
+`$DATA_ROOT` will be mounted to `/tmp/data` within the spark containers. `bin/docker-submit` sets `/tmp/data` as the `basePath` for the sample spark app. Passing in the base path like this is a convention I like to follow because it lets me easily switch my `basePath` to be S3 rooted so my move to EMR is seamless.
+
 ...then edit it.
 
-To launch docker, from your spark project root - do this:
+To launch a dockerized spark master and worker, from your spark project root - do this:
+
+```
+./bin/docker-up
+```
+
+you can rebuild and submit your app at anytime with
 
 ```
 sbt assembly
-./bin/docker-up
+
+./bin/docker-submit
 ```
 
 ## EMR
 
-* Configure instance types and spot pricing in `bin/props-emr`.
-* Configure EC2 and EMR properties in props-emr
+* Configure instance types, spot pricing and other EC2 and EMR properties in props-emr
 
-Deploy to s3 with:
+Once you have all of your EMR properties configured, you can deploy the current version of your assembled jar to s3 with:
 
 ```
-sbt assembly
 ./bin/deploy-s3
 ```
 
 Then launch an auto-terminating EMR cluster that executes your app as a step
 
 ```
-./emr-myapp
+./bin/emr-myapp
 ```
 
-You can add more steps and more scripts by copy/pasting `bin/step-myapp` to `bin/step-yourapp` and adding additional `emr-*` scripts
+You can add more steps and more scripts by copy/pasting `bin/step-myapp` to `bin/step-yourapp` and adding additional `bin/emr-*` scripts
 
 There is also a helper script to launch a general purpose EMR cluster called `emr-general`
 
