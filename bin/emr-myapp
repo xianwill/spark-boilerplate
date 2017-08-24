@@ -1,0 +1,14 @@
+#!/bin/sh
+
+SCRIPT=`realpath $0`
+SCRIPTPATH=`dirname $SCRIPT`
+
+. $SCRIPTPATH/props-emr
+. $SCRIPTPATH/props-app
+. $SCRIPTPATH/def-ec2
+. $SCRIPTPATH/def-instance-group
+. $SCRIPTPATH/step-myapp
+
+export DEF_STEP="[$MYAPP]"
+
+$SCRIPTPATH/launch-emr

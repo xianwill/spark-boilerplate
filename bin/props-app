@@ -1,0 +1,8 @@
+#!/bin/sh
+
+SCRIPT=`realpath $0`
+SCRIPTPATH=`dirname $SCRIPT`
+
+export APP_NAME=$(<$SCRIPTPATH/../NAME)
+export VERSION=$(<$SCRIPTPATH/../VERSION)
+export RUN_GROUP=`date +%Y-%m-%d`

@@ -1,0 +1,34 @@
+#!/bin/sh
+
+SCRIPT=`realpath $0`
+SCRIPTPATH=`dirname $SCRIPT`
+
+. $SCRIPTPATH/def-ec2
+. $SCRIPTPATH/def-instance-group
+. $SCRIPTPATH/props-emr
+
+export APP_NAME=emr-general
+
+echo "============================================================="
+echo "launching cluster $APP_NAME with the settings listed below..."
+echo "* environment: $AWS_ENV"
+echo "* emr release: $EMR_RELEASE"
+echo "* instance group: $DEF_INSTANCE_GROUP"
+echo "* ec2: $DEF_EC2"
+echo "============================================================="
+
+aws emr create-cluster \
+  --termination-protected \
+  --applications Name=Hadoop Name=Spark Name=Ganglia Name=Zeppelin \
+  --tags "Type=emr" "Environment=$AWS_ENV-emr" "Name=$APP_NAME" \
+  --ec2-attributes "$DEF_EC2" \
+  --release-label $EMR_RELEASE \
+  --log-uri $EMR_LOG_URI \
+  --instance-groups "$DEF_INSTANCE_GROUP" \
+  --auto-scaling-role $EMR_AUTOSCALING_ROLE \
+  --service-role $EMR_SERVICE_ROLE \
+  --enable-debugging \
+  --name $APP_NAME \
+  --scale-down-behavior TERMINATE_AT_INSTANCE_HOUR \
+  --region $AWS_REGION \
+  --profile $AWS_ENV

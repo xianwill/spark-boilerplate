@@ -1,0 +1,14 @@
+#!/bin/sh
+
+SCRIPT=`realpath $0`
+SCRIPTPATH=`dirname $SCRIPT`
+
+VERSION=$(<$SCRIPTPATH/../VERSION)
+APP_NAME=$(<$SCRIPTPATH/../NAME)
+
+. $SCRIPTPATH/props-emr
+. $SCRIPTPATH/props-app
+
+TARGET=target/scala-2.11
+
+aws s3 cp $SCRIPTPATH/../$TARGET/$APP_NAME-$VERSION.jar s3://$S3_BUCKET/spark/jars/ --profile $AWS_ENV

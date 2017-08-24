@@ -1,0 +1,12 @@
+#!/bin/sh
+
+SCRIPT=`realpath $0`
+SCRIPTPATH=`dirname $SCRIPT`
+
+echo "SCRIPTPATH is $SCRIPTPATH"
+
+. $SCRIPTPATH/../.env
+
+mkdir -p $DATA_ROOT/spark
+
+docker-compose up -d

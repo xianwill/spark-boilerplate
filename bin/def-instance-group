@@ -1,0 +1,29 @@
+#!/bin/sh
+
+read -d '' DEF_INSTANCE_GROUP << EOF
+[
+  {
+    "InstanceCount":1,
+    "BidPrice":"$EMR_DRIVER_BID",
+    "InstanceGroupType":"MASTER",
+    "InstanceType":"$EMR_DRIVER_INSTANCE_TYPE",
+    "Name":"Master - 1"
+  },
+  {
+    "InstanceCount":$EMR_N_CORE,
+    "BidPrice":"$EMR_BID",
+    "InstanceGroupType":"CORE",
+    "InstanceType":"$EMR_INSTANCE_TYPE",
+    "Name":"Core - $EMR_N_CORE"
+  },
+  {
+    "InstanceCount":$EMR_N_TASK,
+    "BidPrice":"$EMR_BID",
+    "InstanceGroupType":"TASK",
+    "InstanceType":"$EMR_INSTANCE_TYPE",
+    "Name":"Task - $EMR_N_TASK"
+  }
+]
+EOF
+
+export DEF_INSTANCE_GROUP

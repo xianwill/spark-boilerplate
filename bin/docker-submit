@@ -1,0 +1,16 @@
+#!/bin/sh
+
+SCRIPT=`realpath $0`
+SCRIPTPATH=`dirname $SCRIPT`
+
+. $SCRIPTPATH/props-app
+
+SPARK_MASTER=spark://mymaster:7077
+BASE_PATH=/tmp/data
+
+echo "submitting with APP_NAME=$APP_NAME, VERSION=$VERSION and RUN_GROUP=$RUN_GROUP"
+
+docker exec -e SPARK_MASTER=$SPARK_MASTER mymaster \
+  spark-submit /app/$APP_NAME-$VERSION.jar \
+  --base-path $BASE_PATH \
+  --run-group $RUN_GROUP

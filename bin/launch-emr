@@ -1,0 +1,29 @@
+#!/bin/sh
+
+echo "============================================================="
+echo "launching cluster $APP_NAME with the settings listed below..."
+echo "* environment: $AWS_ENV"
+echo "* emr release: $EMR_RELEASE"
+echo "* jar: $S3_JAR..."
+echo "* steps: $DEF_STEP"
+echo "* instance group: $DEF_INSTANCE_GROUP"
+echo "* ec2: $DEF_EC2"
+echo "============================================================="
+
+aws emr create-cluster \
+  --termination-protected \
+  --applications Name=Hadoop Name=Spark Name=Ganglia \
+  --tags "Type=emr" "Environment=$AWS_ENV-emr" "Name=$APP_NAME" \
+  --ec2-attributes "$DEF_EC2" \
+  --release-label $EMR_RELEASE \
+  --log-uri $EMR_LOG_URI \
+  --steps "$DEF_STEP" \
+  --instance-groups "$DEF_INSTANCE_GROUP" \
+  --auto-terminate \
+  --auto-scaling-role $EMR_AUTOSCALING_ROLE \
+  --service-role $EMR_SERVICE_ROLE \
+  --enable-debugging \
+  --name $APP_NAME \
+  --scale-down-behavior TERMINATE_AT_INSTANCE_HOUR \
+  --region $AWS_REGION \
+  --profile $AWS_ENV

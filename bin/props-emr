@@ -1,0 +1,40 @@
+#!/bin/sh
+
+###################################################################
+#  environment must also define                                   #
+#    * AWS_ENV as one of "dev" or "prod"                          # 
+#    * CASSANDRA_USERNAME and CASSANDRA_PASSWORD                  #
+###################################################################
+
+if [ "$AWS_ENV" == "dev" ]; then
+  export EC2_SUBNET=
+  export EC2_SG_MASTER=
+  export EC2_SG_SLAVE=
+elif [ "$AWS_ENV" == "prod" ]; then
+  export EC2_SUBNET=
+  export EC2_SG_MASTER=
+  export EC2_SG_SLAVE=
+else
+  echo "unknown environment $AWS_ENV"
+  exit 1
+fi
+
+export AWS_REGION=
+export S3_SCHEME=s3a
+export S3_BUCKET=
+export S3_JAR=s3://$S3_BUCKET/spark/jars/$APP_NAME-$VERSION.jar
+export EMR_AUTOSCALING_ROLE=EMR_AutoScaling_DefaultRole
+export EMR_SERVICE_ROLE=EMR_DefaultRole
+export EMR_RELEASE=emr-5.8.0
+export EMR_LOG_URI=
+export EC2_INSTANCE_PROFILE=EMR_EC2_DefaultRole
+export EC2_KEY_NAME=
+
+# spot bidding
+
+export EMR_BID=".35"
+export EMR_INSTANCE_TYPE="m4.4xlarge"
+export EMR_DRIVER_BID=".25"
+export EMR_DRIVER_INSTANCE_TYPE="m4.xlarge"
+export EMR_N_CORE=4
+export EMR_N_TASK=4

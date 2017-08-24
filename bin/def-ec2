@@ -1,0 +1,13 @@
+#!/bin/sh
+
+read -d '' DEF_EC2 << EOF
+{
+  "InstanceProfile":"$EC2_INSTANCE_PROFILE",
+  "SubnetId":"$EC2_SUBNET",
+  "EmrManagedSlaveSecurityGroup":"$EC2_SG_SLAVE",
+  "EmrManagedMasterSecurityGroup":"$EC2_SG_MASTER",
+  "KeyName": "$EC2_KEY_NAME"
+}
+EOF
+
+export DEF_EC2

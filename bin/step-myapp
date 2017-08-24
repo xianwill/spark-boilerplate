@@ -1,0 +1,24 @@
+#!/bin/sh
+
+CLASSNAME=MyApp
+
+read -d '' DEF_STEP << EOF
+{
+  "Args":[
+    "spark-submit",
+    "--deploy-mode","cluster",
+    "--class","com.example.$APP_NAME.$CLASSNAME",
+    "--conf","spark.yarn.appMasterEnv.SPARK_MASTER=yarn",
+    "$S3_JAR",
+    "--base-path","$S3_SCHEME://$S3_BUCKET",
+    "--run-group", "$RUN_GROUP"
+    ],
+    "Type":"CUSTOM_JAR",
+    "ActionOnFailure":"TERMINATE_CLUSTER",
+    "Jar":"command-runner.jar",
+    "Properties":"",
+    "Name":"$CLASSNAME"
+}
+EOF
+
+export MYAPP=$DEF_STEP
