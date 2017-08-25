@@ -4,10 +4,10 @@ This is a boilerplate to bootstrap a spark project quickly.
 
 It includes:
 
-* Runnable tests
-* A runnable docker setup
-* Runnable EMR scripts
-* Several Helpers you will likely find useful
+* unit and integration test config
+* a runnable docker setup
+* runnable EMR scripts
+* several helpers you will likely find useful
 
 ## Some Strings to Hunt/Change
 
@@ -33,7 +33,7 @@ Make sure you change the value in the `NAME` file. That drives the app name appl
 
 ## Testing
 
-Like I said, I like to run watch mode with `~test` -- but, I don't like to wait for the spark context to reinitialize with every test. So, this project is configured with a separate test command for tests that depend on the spark context.
+Like I said, I like to run watch mode with `~test` -- but, I don't like to wait for the spark session to reinitialize with every test. So, this project is configured with a separate test command for tests that depend on the spark session.
 
 Name your integration specs with the suffix `IntegrationSpec`. Then, in an sbt console, run them with:
 
