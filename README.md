@@ -69,9 +69,7 @@ sbt assembly
 
 ## EMR
 
-* Configure instance types, spot pricing and other EC2 and EMR properties in props-emr
-
-Once you have all of your EMR properties configured, you can deploy the current version of your assembled jar to s3 with:
+Configure instance types, spot pricing and other EC2 and EMR properties in props-emr. Once you have all of your EMR properties configured, you can deploy the current version of your assembled jar to s3 with:
 
 ```
 ./bin/deploy-s3
@@ -83,8 +81,8 @@ Then launch an auto-terminating EMR cluster that executes your app as a step
 ./bin/emr-myapp
 ```
 
-You can add more steps and more scripts by copy/pasting `bin/step-myapp` to `bin/step-yourapp` and adding additional `bin/emr-*` scripts
+You can add more steps and more scripts by copy/pasting `bin/step-myapp` to `bin/step-yourapp` and adding additional `bin/emr-*` scripts. `emr-*` scripts can be configured to run multiple steps by adding additional `step-*` output to the `$DEF_STEP` array.
 
-There is also a helper script to launch a general purpose EMR cluster called `emr-general`
+There is also a helper script to launch a general purpose EMR cluster called `emr-general`. Make sure you terminate the `emr-general` cluster yourself when you are done with it.
 
 
