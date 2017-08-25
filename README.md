@@ -47,9 +47,9 @@ Make your own `.env`
 cp env.tempate .env
 ```
 
-`$DATA_ROOT` will be mounted to `/tmp/data` within the spark containers. `bin/docker-submit` sets `/tmp/data` as the `basePath` for the sample spark app. Passing in the base path like this is a convention I like to follow because it lets me easily switch my `basePath` to be S3 rooted so my move to EMR is seamless.
-
 ...then edit it.
+
+`$DATA_ROOT` will be mounted to `/tmp/data` within the spark containers. `bin/docker-submit` sets `/tmp/data` as the `basePath` for the sample spark app. Passing in the base path like this is a convention I like to follow because it lets me easily switch my `basePath` to be S3 rooted so my move to EMR is seamless.
 
 To launch a dockerized spark master and worker, from your spark project root - do this:
 
