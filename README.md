@@ -24,18 +24,20 @@ It includes:
 * Aside from the general guidelines, the project comes with a lot of helpers I find useful...
   * bin scripts for launching an emr cluster
   * Sample `scalatest` tests
-  * A `docker-compose` file and a `Dockerfile` for end-to-end local testing
-  * CSV and JSON resource loaders
-  * A stubbed out project config with baked in path conventions
+  * A `docker-compose` file that runs a spark master and worker
+  * Helpers for loading CSV and JSON resources
+  * A helper I like to use for file path conventions
   * A schema generator
 
 ## Packaging
 
-The build is configured with the `assembly` plugin to build an uber jar suitable for deployment. Build it with
+The build is configured with the `assembly` plugin to build an uber jar suitable for deployment. Build the uber jar with:
 
 ```
 sbt assembly
 ```
+
+Then you can submit it to docker or deploy it to S3 with the helper scripts.
 
 ## Docker
 
