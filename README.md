@@ -16,6 +16,8 @@ It includes:
 * MyType
 * example
 
+Make sure you change the value in the `NAME` file. That drives the app name applied by sbt to build the jar as well as the emr and docker scripts.
+
 ## Tooling
 
 * Always be `sbt`-ing. I like to run non-spark dependent helper functions in watch mode with `~test`.
