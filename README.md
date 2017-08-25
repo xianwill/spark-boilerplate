@@ -43,6 +43,8 @@ Then you can submit it to docker or deploy it to S3 with the helper scripts.
 
 ## Docker/Local Development
 
+First of all - big shout out for the getty image (https://github.com/gettyimages/docker-spark) used in this project's `docker-compose.yml`. Its great.
+
 Make your own `.env`
 
 ```
