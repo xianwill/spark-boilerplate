@@ -6,7 +6,7 @@ package object example {
   def createSparkSession() = SparkSession.
     builder.
     appName(getClass.getName).
-    master(sys.env("SPARK_MASTER")).
+    master(sys.env.getOrElse("SPARK_MASTER", "")).
     config("spark.speculation", false).
     config("spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version", 2).
     config("fs.s3a.fast.upload", true).

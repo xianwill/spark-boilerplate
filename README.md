@@ -31,6 +31,18 @@ Make sure you change the value in the `NAME` file. That drives the app name appl
   * A helper I like to use for file path conventions
   * A schema generator
 
+## Testing
+
+Like I said, I like to run watch mode with `~test` -- but, I don't like to wait for the spark context to reinitialize with every test. So, this project is configured with a separate test command for tests that depend on the spark context.
+
+Name your integration specs with the suffix `IntegrationSpec`. Then, in an sbt console, run them with:
+
+```
+it:test
+```
+
+This is a nice SO on testing with a spark context btw - https://stackoverflow.com/questions/43729262/how-to-write-unit-tests-in-spark-2-0#answer-43769845.
+
 ## Packaging
 
 The build is configured with the `assembly` plugin to build an uber jar suitable for deployment. Build the uber jar with:

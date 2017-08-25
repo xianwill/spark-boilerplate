@@ -30,5 +30,17 @@ lazy val root = (project in file("."))
     libraryDependencies += commonsCsv,
     libraryDependencies += scalaTest
   )
+  .configs( IntegrationTest )
+  .settings( inConfig(IntegrationTest)(Defaults.testTasks) : _*)
+  .settings(
+    testOptions in Test := Seq(Tests.Filter(unitFilter)),
+    testOptions in IntegrationTest := Seq(Tests.Filter(itFilter))
+  )
+
+def itFilter(name: String): Boolean = name endsWith "IntegrationSpec"
+def unitFilter(name: String): Boolean = (name endsWith "Spec") && !itFilter(name)
+
+lazy val IntegrationTest: Configuration = config("it") extend Test
+  
 
 run in Compile := Defaults.runTask(fullClasspath in Compile, mainClass in (Compile, run), runner in (Compile, run)).evaluated
