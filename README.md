@@ -39,7 +39,7 @@ sbt assembly
 
 Then you can submit it to docker or deploy it to S3 with the helper scripts.
 
-## Docker
+## Docker/Local Development
 
 Make your own `.env`
 
