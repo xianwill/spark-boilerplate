@@ -1,4 +1,4 @@
-package com.example
+package com.example.myapp
 
 import scala.io.Source
 import scala.collection.JavaConversions._

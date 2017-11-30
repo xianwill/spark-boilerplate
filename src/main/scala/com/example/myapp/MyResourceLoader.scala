@@ -1,4 +1,4 @@
-package com.example
+package com.example.myapp
 
 import scala.collection.JavaConversions._
 import org.json4s._

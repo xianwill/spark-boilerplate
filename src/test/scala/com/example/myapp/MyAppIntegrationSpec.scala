@@ -1,4 +1,4 @@
-package com.example
+package com.example.myapp
 
 import org.scalatest.{FlatSpec,Matchers}
 import org.apache.spark.sql.SparkSession

@@ -2,7 +2,7 @@
 
 ###################################################################
 #  environment must also define                                   #
-#    * AWS_ENV as one of "dev" or "prod"                          # 
+#    * AWS_ENV as one of "dev" or "prod"                          #
 #    * CASSANDRA_USERNAME and CASSANDRA_PASSWORD                  #
 ###################################################################
 
@@ -25,7 +25,7 @@ export S3_BUCKET=
 export S3_JAR=s3://$S3_BUCKET/spark/jars/$APP_NAME-$VERSION.jar
 export EMR_AUTOSCALING_ROLE=EMR_AutoScaling_DefaultRole
 export EMR_SERVICE_ROLE=EMR_DefaultRole
-export EMR_RELEASE=emr-5.8.0
+export EMR_RELEASE=emr-5.10.0
 export EMR_LOG_URI=
 export EC2_INSTANCE_PROFILE=EMR_EC2_DefaultRole
 export EC2_KEY_NAME=

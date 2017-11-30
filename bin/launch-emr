@@ -11,7 +11,6 @@ echo "* ec2: $DEF_EC2"
 echo "============================================================="
 
 aws emr create-cluster \
-  --termination-protected \
   --applications Name=Hadoop Name=Spark Name=Ganglia \
   --tags "Type=emr" "Environment=$AWS_ENV-emr" "Name=$APP_NAME" \
   --ec2-attributes "$DEF_EC2" \

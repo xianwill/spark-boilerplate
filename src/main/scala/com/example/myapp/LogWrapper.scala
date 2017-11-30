@@ -1,4 +1,4 @@
-package com.example
+package com.example.myapp
 
 import org.slf4j.LoggerFactory
 

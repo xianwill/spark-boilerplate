@@ -1,4 +1,4 @@
-package com.example
+package com.example.myapp
 
 import org.apache.spark.sql.SaveMode
 import DataFrameHelper._

@@ -1,8 +1,8 @@
-package com
+package com.example
 
 import org.apache.spark.sql.SparkSession
 
-package object example {  
+package object myapp {  
   def createSparkSession() = SparkSession.
     builder.
     appName(getClass.getName).

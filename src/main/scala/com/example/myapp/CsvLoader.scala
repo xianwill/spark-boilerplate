@@ -1,4 +1,4 @@
-package com.example
+package com.example.myapp
 
 import org.apache.commons.csv.{CSVFormat, CSVParser}
 import java.nio.charset.Charset

@@ -1,4 +1,4 @@
-package com.example
+package com.example.myapp
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.SaveMode
@@ -21,7 +21,7 @@ object MyApp {
     df.foreach(o => {
       LogWrapper.logger.info(s"MyType instance: ${o.id} - ${o.name}")
     })
-    
+
     df.toDF.writeToSingleCsv(pathHelper.myappRows)
   }
 }

@@ -6,4 +6,4 @@ target
 .ensime_cache
 .ensime
 spark-warehouse
-.history
+.historyensime.sbt

@@ -5,7 +5,7 @@ This is a boilerplate to bootstrap a spark project quickly.
 It includes:
 
 * unit and integration test config
-* a runnable docker setup
+* runnable docker setup
 * runnable EMR scripts
 * several helpers you will likely find useful
 
@@ -31,9 +31,17 @@ Make sure you change the value in the `NAME` file. That drives the app name appl
   * A helper I like to use for file path conventions
   * A schema generator
 
+If, like me, your system scala version is 2.12.0 or greater, you can:
+
+```
+cp esime.sbt.template ensime.sbt
+```
+
+before generating your ensime config.
+
 ## Testing
 
-Like I said, I like to run watch mode with `~test` -- but, I don't like to wait for the spark session to reinitialize with every test. So, this project is configured with a separate test command for tests that depend on the spark session.
+I like to run watch mode with `~test` -- but, I don't like to wait for the spark session to reinitialize with every test. So, this project is configured with a separate test command for tests that depend on the spark session.
 
 Name your integration specs with the suffix `IntegrationSpec`. Then, in an sbt console, run them with:
 
@@ -64,6 +72,7 @@ cp env.tempate .env
 ```
 
 ...then edit it.
+
 
 `$DATA_ROOT` will be mounted to `/tmp/data` within the spark containers. `bin/docker-submit` sets `/tmp/data` as the `basePath` for the sample spark app. Passing in the base path like this is a convention I like to follow because it lets me easily switch my `basePath` to be S3 rooted so my move to EMR is seamless.
 
@@ -98,5 +107,4 @@ Then launch an auto-terminating EMR cluster that executes your app as a step
 You can add more steps and more scripts by copy/pasting `bin/step-myapp` to `bin/step-yourapp` and adding additional `bin/emr-*` scripts. `emr-*` scripts can be configured to run multiple steps by adding additional `step-*` output to the `$DEF_STEP` array.
 
 There is also a helper script to launch a general purpose EMR cluster called `emr-general`. Make sure you terminate the `emr-general` cluster yourself when you are done with it.
-
 

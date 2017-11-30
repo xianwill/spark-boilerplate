@@ -2,7 +2,7 @@ import sbt._
 
 object Exclusions {
   lazy val all = Seq(
-    ExclusionRule(name = "log4j"),
-    ExclusionRule(name = "slf4j-log4j12")
+    ExclusionRule(organization = "log4j", name = "log4j"),
+    ExclusionRule(organization = "slf4j-log4j12", name = "slf4j-log4j12")
   )
 }

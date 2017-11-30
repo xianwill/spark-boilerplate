@@ -1,7 +1,6 @@
 #!/bin/sh
 
-SCRIPT=`realpath $0`
-SCRIPTPATH=`dirname $SCRIPT`
+export SCRIPTPATH="$(cd $(dirname $([ -L ${BASH_SOURCE[0]} ] && readlink ${BASH_SOURCE[0]} || echo ${BASH_SOURCE[0]})) && pwd -P)"
 
 . $SCRIPTPATH/props-app
 
