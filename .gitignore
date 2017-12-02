@@ -7,3 +7,4 @@ target
 .ensime
 spark-warehouse
 .historyensime.sbt
+data

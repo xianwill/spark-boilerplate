@@ -15,20 +15,21 @@ lazy val root = (project in file("."))
     commonSettings,
     name := appName,
     assemblyJarName in assembly := s"${name.value}-$fileVersion.jar",
-    libraryDependencies ~= { _.map(_.excludeAll(Exclusions.all: _*)) },  
-    libraryDependencies += sparkCore,
-    libraryDependencies += sparkSql,
-    libraryDependencies += slf4jApi,
-    libraryDependencies += log4jOverSlf4j,
-    libraryDependencies += logbackCore,
-    libraryDependencies += logbackClassic,
-    libraryDependencies += scallop,
-    libraryDependencies += cassConnector,
-    libraryDependencies += awsSdk,
-    libraryDependencies += hadoopAws,
-    libraryDependencies += json4sNative,
-    libraryDependencies += commonsCsv,
-    libraryDependencies += scalaTest
+    libraryDependencies ++= List(
+      sparkCore,
+      sparkSql,
+      scallop,
+      cassConnector,
+      elasticSearchSpark,
+      awsSdk,
+      hadoopAws,
+      json4sNative,
+      commonsCsv,
+      httpclient,
+      scalaTest,
+      scalaLogging
+    )
+    //libraryDependencies ~= (_.map(excludeLog4j))
   )
   .configs( IntegrationTest )
   .settings( inConfig(IntegrationTest)(Defaults.testTasks) : _*)
@@ -37,10 +38,20 @@ lazy val root = (project in file("."))
     testOptions in IntegrationTest := Seq(Tests.Filter(itFilter))
   )
 
+
+assemblyShadeRules in assembly := Seq(
+  ShadeRule.rename("org.apache.http.**" -> "shadehttp.@1").inAll
+)
+
 def itFilter(name: String): Boolean = name endsWith "IntegrationSpec"
 def unitFilter(name: String): Boolean = (name endsWith "Spec") && !itFilter(name)
 
 lazy val IntegrationTest: Configuration = config("it") extend Test
-  
+
+fork in run := true
+javaOptions in run ++= Seq(
+  "-Dlog4j.debug=true",
+  "-Dlog4j.configuration=log4j.properties")
+outputStrategy := Some(StdoutOutput)
 
 run in Compile := Defaults.runTask(fullClasspath in Compile, mainClass in (Compile, run), runner in (Compile, run)).evaluated

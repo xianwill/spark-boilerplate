@@ -2,4 +2,4 @@
 
 export APP_NAME=$(<$SCRIPTPATH/../NAME)
 export VERSION=$(<$SCRIPTPATH/../VERSION)
-export RUN_GROUP=`date +%Y-%m-%d`
+export RUN_GROUP=`date +%Y%m%d`

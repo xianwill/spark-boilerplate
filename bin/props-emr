@@ -1,11 +1,5 @@
 #!/bin/sh
 
-###################################################################
-#  environment must also define                                   #
-#    * AWS_ENV as one of "dev" or "prod"                          #
-#    * CASSANDRA_USERNAME and CASSANDRA_PASSWORD                  #
-###################################################################
-
 if [ "$AWS_ENV" == "dev" ]; then
   export EC2_SUBNET=
   export EC2_SG_MASTER=

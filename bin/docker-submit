@@ -3,13 +3,27 @@
 export SCRIPTPATH="$(cd $(dirname $([ -L ${BASH_SOURCE[0]} ] && readlink ${BASH_SOURCE[0]} || echo ${BASH_SOURCE[0]})) && pwd -P)"
 
 . $SCRIPTPATH/props-app
+. $SCRIPTPATH/../.env
 
 SPARK_MASTER=spark://mymaster:7077
-BASE_PATH=/tmp/data
+BASE_PATH=/data
 
 echo "submitting with APP_NAME=$APP_NAME, VERSION=$VERSION and RUN_GROUP=$RUN_GROUP"
 
-docker exec -e SPARK_MASTER=$SPARK_MASTER mymaster \
-  spark-submit /app/$APP_NAME-$VERSION.jar \
-  --base-path $BASE_PATH \
-  --run-group $RUN_GROUP
+docker exec \
+	-e POSTGRES_HOST=mypostgres \
+	-e POSTGRES_DATABASE=mypostgres \
+	-e POSTGRES_USER=$POSTGRES_USER \
+	-e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
+	-e CASSANDRA_HOST=mycassandra \
+	-e KAFKA_HOST=mykafka \
+	-e ELASTICSEARCH_HOST=myelasticsearch \
+	-e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+	-e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+	-e S3_BUCKET=$S3_BUCKET \
+	-e SPARK_MASTER=$SPARK_MASTER \
+	mymaster \
+  spark-submit \
+    /app/$APP_NAME-$VERSION.jar \
+    --base-path $BASE_PATH \
+    --run-group $RUN_GROUP

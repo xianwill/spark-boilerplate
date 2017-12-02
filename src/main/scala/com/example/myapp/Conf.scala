@@ -10,7 +10,12 @@ object ConfHelper {
 class MyAppConf(arguments: Seq[String]) extends ScallopConf(arguments) {
   val basePath = opt[String](required=true)
   val runGroup = opt[String](required=true, default=ConfHelper.defaultRunGroup())
+  val s3download = opt[Boolean]()
 
   verify()
 }
 
+class MyStreamingAppConf(arguments: Seq[String]) extends ScallopConf(arguments) {
+
+  verify()
+}

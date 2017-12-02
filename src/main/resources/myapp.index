@@ -1,0 +1,17 @@
+{
+  "mappings": {
+    "thing": {
+      "properties": {
+        "name": {
+          "fielddata": true,
+          "fields": {
+              "keyword": {
+                  "type": "keyword"
+              }
+          },
+          "type": "text"
+        }
+      }
+    }
+  }
+}
